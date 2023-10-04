@@ -1,0 +1,70 @@
+﻿@using CMSProject.Models;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Contactpage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "_Layout.cshtml";
+
+    var contactForm = new ContactForm();
+
+
+    ViewData["PageTitle"] = @Model.Value("pageTitle");
+    ViewData["PageDescription"] = @Model.Value("pageDescription");
+    ViewData["PageKeywords"] = @Model.Value("pageKeywords");
+}
+
+@await Html.PartialAsync("BreadcrumbPartial")
+
+    <section class="form-page">
+        <div class="contact-boxes container">
+            <div class="box">
+                <div class="circle">
+                    <i class="fa-sharp fa-regular fa-location-dot" style="color: #ffffff;"></i>
+                </div>
+                <div class="details">
+                    <p><b>Visit Us</b></p>
+                    <p>Sveavägen 31, <br>111 34 Stockholm</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="circle">
+                    <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
+                </div>
+                <div class="details">
+                    <p><b>Call Us</b></p>
+                    <p>+46 (8) 424 25 64 <br>+46 (8) 424 25 42</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="circle">
+                    <i class="fa-sharp fa-regular fa-location-dot" style="color: #ffffff;"></i>
+                </div>
+                <div class="details">
+                    <p><b>Email Us</b></p>
+                    <p>info@crito.com <br>support@crito.com</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="form">
+            <div class="container message-form">
+                @using (Html.BeginUmbracoForm("Index", "Contact", FormMethod.Post))
+            {
+                <div asp-validation-summary="ModelOnly"></div>
+                <h1>Leave us a message for <br>any information</h1>
+                <input asp-for="@contactForm.Name" type="text" placeholder="Name" class="input-field">
+                <span asp-validation-for="@contactForm.Name" class="text-danger"></span>
+
+                <input asp-for="@contactForm.Email" type="email" placeholder="Email" class="input-field">
+                <span asp-validation-for="@contactForm.Email" class="text-danger"></span>
+
+                <textarea asp-for="@contactForm.Message" placeholder="Your message" class="textarea-field"></textarea>
+                <span asp-validation-for="@contactForm.Message" class="text-danger"></span>
+                <button type="submit" class="theme-button">Send Message <i class="fa-light fa-arrow-up-right"></i></button>
+
+            }
+            </div>
+        </div>
+    </section>
+
+@await Html.PartialAsync("MapPartial")

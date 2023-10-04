@@ -1,0 +1,15 @@
+﻿@using Umbraco.Cms.Core.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+<section class="presentation">
+    <ul class="partners container style="list-style-type: none;>
+        @{
+            var partners = Model.Value<IEnumerable<MediaWithCrops>>("partners");
+
+            foreach (var partner in partners)
+            {
+                <li><img src="@partner.MediaUrl()" alt=""></li>
+            }
+        }
+    </ul>
+</section>
